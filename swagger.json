@@ -1,0 +1,780 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.1.0",
+        "title": "TrackingAPI",
+        "description": "API for retrieving tracking data and changing settings on LightBug & RemoteThings tracking devices"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/devices/{id}/points/{fk}": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Retrieve a specific point for a device",
+                "operationId": "device.prototype.__findById__points",
+                "parameters": [
+                    {
+                        "name": "fk",
+                        "in": "path",
+                        "description": "Foreign key for points",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/datapoint"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Delete a specific point for a device",
+                "operationId": "device.prototype.__destroyById__points",
+                "parameters": [
+                    {
+                        "name": "fk",
+                        "in": "path",
+                        "description": "Foreign key for points",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request was successful"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/devices/{id}/config": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Retrieve configuration for a device",
+                "operationId": "device.prototype.__get__config",
+                "parameters": [
+                    {
+                        "name": "refresh",
+                        "description": "unused",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/deviceConfig"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Update configuration for a device",
+                "operationId": "device.prototype.__update__config",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/deviceConfig"
+                        },
+                        "description": "Body (JSON)"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/deviceConfig"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/devices/{id}/points": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Retrieve points for a device",
+                "operationId": "device.prototype.__get__points",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "description": "JSON Filter object",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/datapoint"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/devices/{id}": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Find a model instance by {{id}} from the data source.",
+                "operationId": "device.findById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "filter",
+                        "description": "Filter defining fields and include - must be a JSON-encoded string ({\"something\":\"value\"})",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/device"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/users/{id}/devices": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Queries devices of user.",
+                "operationId": "user.prototype.__get__devices",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "description": "JSON Filter object",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/device"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Login a user with username/email and password.",
+                "operationId": "user.login",
+                "parameters": [
+                    {
+                        "name": "credentials",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/credentials"
+                        },
+                        "description": "Body (JSON)"
+                    },
+                    {
+                        "name": "include",
+                        "in": "query",
+                        "description": "Related objects to include in the response. See the description of return value for more details.",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/accessToken"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "device"
+        }
+    ],
+    "consumes": [
+        "application/json",
+        "application/x-www-form-urlencoded",
+        "application/xml",
+        "text/xml"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml",
+        "text/xml",
+        "application/javascript",
+        "text/javascript"
+    ],
+    "definitions": {
+        "datapoint": {
+            "properties": {
+                "location": {
+                    "$ref": "#/definitions/GeoPoint"
+                },
+                "timestamp": {
+                    "description": "Timestamp for the datapoint. NB this is not necessarily the same as 'created'",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "speed": {
+                    "description": "Ground velocity in kmh, as determined by the GPS",
+                    "type": "number",
+                    "format": ""
+                },
+                "altitude": {
+                    "description": "Altitude in m, as determined by the GPS",
+                    "type": "number",
+                    "format": ""
+                },
+                "course": {
+                    "description": "Course in degrees, as determined by the GPS",
+                    "type": "number",
+                    "format": ""
+                },
+                "num_value": {
+                    "description": "Internal use only",
+                    "type": "string"
+                },
+                "stringValue": {
+                    "description": "Internal use only",
+                    "type": "string"
+                },
+                "sendReason": {
+                    "description": "Bitfield indicating reason for datapoint transmission and status of the device at the time.\n\r\nBit1(1): Wake mode active, \n\r\nBit2(2): Sleep mode active, \n\r\nBit3(4): Bluetooth disconnected, \n\r\nBit4(8): Outside of Safe-zone, \n\r\nBit5(16): Motion detected, \n\r\nBit6(32): Device started moving, \n\r\nBit7(64): Device stopped moving, \n\r\nBit8(128): Position is stale: last known location was used\n\r\nSpecial case 255/0xFF: device was checking in with server. Ignore all data",
+                    "type": "number",
+                    "format": ""
+                },
+                "sats": {
+                    "description": "Number of visible satellites, as determined by the GPS",
+                    "type": "number",
+                    "format": ""
+                },
+                "hdop": {
+                    "description": "Deprecated",
+                    "type": "number",
+                    "format": ""
+                },
+                "accuracy": {
+                    "description": "Accuracy of the location in meters",
+                    "type": "number",
+                    "format": ""
+                },
+                "locationType": {
+                    "default": "gps",
+                    "description": "Type of position. Can be 'gps', 'wifi', 'gsm' or 'invalid'",
+                    "type": "string"
+                },
+                "batteryVoltage": {
+                    "description": "Battery charge level in volts.",
+                    "type": "number",
+                    "format": ""
+                },
+                "averageCharge": {
+                    "description": "Internal Use. 255 indicates plugged in and charging.",
+                    "type": "number",
+                    "format": ""
+                },
+                "created": {
+                    "description": "Timestamp for when the datapoint was received and processed by the server",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "address": {
+                    "description": "A reverse geocode result for the point",
+                    "type": "string"
+                },
+                "alertType": {
+                    "description": "Bitfield indicating what alerts where active at transmission time\n\r\nBit1(1): Freefall / Drop detected, \n\r\nBit2(2): Rotation detected, \n\r\nBit3(4): GSM jamming detected, \n\r\nBit4(8): Button was pressed, \n\r\nBit5(16): Generic Alert ",
+                    "type": "number",
+                    "format": ""
+                },
+                "id": {
+                    "type": "number",
+                    "format": ""
+                },
+                "deviceId": {
+                    "type": "number",
+                    "format": ""
+                }
+            },
+            "required": [
+                "timestamp",
+                "locationType",
+                "created"
+            ],
+            "additionalProperties": false
+        },
+        "deviceConfig": {
+            "properties": {
+                "currentFW": {
+                    "description": "Current Firmware version",
+                    "type": "string"
+                },
+                "otaFW": {
+                    "description": "Pending Firmware version. If non null, the unit will be told to upgrade to\nthis version when it next transmits in sleep mode.",
+                    "type": "string"
+                },
+                "interval": {
+                    "default": 300,
+                    "description": "The wake mode interval in seconds. The unit will connect to the server this often when awake.",
+                    "type": "number",
+                    "format": ""
+                },
+                "sleepInterval": {
+                    "default": 43200,
+                    "description": "Sleep mode interval in seconds. The unit will try to connect this often to the server when asleep",
+                    "type": "number",
+                    "format": ""
+                },
+                "checkInInterval": {
+                    "default": 43500,
+                    "description": "Internal Use. A failsafe to ensure the unit connects to the server at least this often.",
+                    "type": "number",
+                    "format": ""
+                },
+                "packing": {
+                    "default": 1,
+                    "description": "The number of GPS points to send with each transmission. A packing setting of 3 with an 'interval'\nof 60s will result in points recorded approximately every 20s, but they will only be sent together.\nThis increases the time you have to wait for locations to come through to the server but improves battery life",
+                    "type": "number",
+                    "format": ""
+                },
+                "movementSensitivity": {
+                    "default": 1,
+                    "description": "Deprecated. See debounce.",
+                    "type": "number",
+                    "format": ""
+                },
+                "debounce": {
+                    "default": 3,
+                    "description": "Movement sensitivity on a scale of 1 to 10, with 1 being the most sensitive. It is correlated to the\nnumber of consecutive milliseconds the acceleration needs to exceed the movementSensitivity threshold",
+                    "type": "number",
+                    "format": ""
+                },
+                "movementSensitivity2": {
+                    "default": 1,
+                    "description": "A secondary debounce value. Typically this value is lower or equal to debounce, representing increased\nsensitivity to movement once the device is already moving.",
+                    "type": "number",
+                    "format": ""
+                },
+                "behavior": {
+                    "default": 0,
+                    "description": "Char Bitfield with various flags. Advanced use only. \nDisableBluetooth:32 | \nEncrypt:128 | \nGsmOnWhenAwake:1 | \nGsmOnWhenAsleep:2 | \nGpsOnWhenAwake:4 | \nDisableWifiAccuracyAssist:8 | \nRepeatSleep:16 | \nDisableWifi:64",
+                    "type": "number",
+                    "format": ""
+                },
+                "modeControl": {
+                    "default": 0,
+                    "description": "Char Bitfield with various flags. Advanced use only. \nStartStopOnly:1 | \nLockAwakeOnAlert:2 | \nSendSleepLocAfterBtDisconnect:4 | ",
+                    "type": "number",
+                    "format": ""
+                },
+                "gpsTimeout": {
+                    "default": 90,
+                    "description": "How long to let the GPS searches for a lock in seconds before giving up. Max 255s.",
+                    "type": "number",
+                    "format": ""
+                },
+                "transmitTimeout": {
+                    "default": 0,
+                    "description": "When the unit first wakes up from sleep, how long to wait before trying to transmit in multiples of 30 seconds. 0 = instant, 1 = 30s, 2 = 60s...\n\r\nUseful to avoid detection or draining battery inside shielded buildings.",
+                    "type": "number",
+                    "format": ""
+                },
+                "gpsStabilize": {
+                    "default": 10,
+                    "description": "How long to let the GPS stabilise in seconds once a lock is achieved before sending the position. Higher values may increase accuracy.",
+                    "type": "number",
+                    "format": ""
+                },
+                "gpsCheckInterval": {
+                    "default": 300,
+                    "description": "If a safe-zone is used, how often to check the wifi & gps to see if its still inside it (only applies when motion is detected)",
+                    "type": "number",
+                    "format": ""
+                },
+                "stopTimeout": {
+                    "default": 90,
+                    "description": "The total amount of time in seconds the unit has to be stationary for before deeming the journey over and switching to sleep mode",
+                    "type": "number",
+                    "format": ""
+                },
+                "tolerancePercentage": {
+                    "default": 3,
+                    "description": "Reserved for internal use.",
+                    "type": "number",
+                    "format": ""
+                },
+                "reasonsToWake": {
+                    "default": [
+                        {
+                            "bluetooth": false,
+                            "move": true,
+                            "geofence": false
+                        }
+                    ],
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "modified": {
+                    "description": "Set to any non null date to indicate the configuration should be pushed to the device when it next connects",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "forceFw": {
+                    "default": false,
+                    "description": "Internal use.\n\r\nUsed with otaFW. Set to true to force the unit to upgrade on next connection (rather than waiting\nfor a sleep connection",
+                    "type": "boolean"
+                },
+                "receivedAt": {
+                    "default": 0,
+                    "description": "Indicates the last time the settings were sent to the device",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "reset": {
+                    "description": "Non NULL values cause unit to restart on next connection\n\r\n0 = Normal reboot\n\r\n1 = Clear settings cache and restart\n\r\n2 = Clear cache and bluetooth connection data, then restart",
+                    "type": "number",
+                    "format": ""
+                },
+                "flashTryCount": {
+                    "description": "Internal use. Set to 0 when changing otaFW",
+                    "type": "number",
+                    "format": ""
+                },
+                "homeWifiNetwork": {
+                    "maxLength": 127,
+                    "description": "WiFi network name to use as a Safe-zone. When this network is visible, stay asleep",
+                    "type": "string"
+                },
+                "wakeAction": {
+                    "default": "normal",
+                    "description": "What to do when the unit wakes up (ie is moved and not in a safe-zone). Options are 'available'\n(lost and found), and 'normal' (tracking)",
+                    "type": "string"
+                },
+                "onDemandTime": {
+                    "default": 30,
+                    "description": "Deprecated",
+                    "type": "number",
+                    "format": ""
+                },
+                "alertAction": {
+                    "default": "nothing",
+                    "description": "What to do when the button is pressed or the unit is dropped. Options are\n'available' (stay registered on the mobile network),\n'nothing' (one transmission) and \n'lockOn' (keep transmitting at 'interval' until instructed otherwise",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "number",
+                    "format": ""
+                },
+                "deviceId": {
+                    "type": "number",
+                    "format": ""
+                }
+            },
+            "required": [
+                "interval",
+                "sleepInterval",
+                "checkInInterval",
+                "packing",
+                "wakeAction",
+                "onDemandTime",
+                "alertAction"
+            ],
+            "additionalProperties": false
+        },
+        "notificationTrigger": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "type": "object"
+                },
+                "muteFor": {
+                    "type": "number",
+                    "format": ""
+                },
+                "lastTriggered": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "delivery": {
+                    "default": {
+                        "push": true,
+                        "email": false
+                    },
+                    "type": "object"
+                },
+                "id": {
+                    "type": "number",
+                    "format": ""
+                },
+                "deviceId": {
+                    "type": "number",
+                    "format": ""
+                },
+                "userId": {
+                    "type": "number",
+                    "format": ""
+                }
+            },
+            "required": [
+                "name",
+                "type",
+                "muteFor",
+                "delivery"
+            ],
+            "additionalProperties": false
+        },
+        "device": {
+            "properties": {
+                "imei": {
+                    "maxLength": 15,
+                    "type": "string"
+                },
+                "iccid": {
+                    "type": "string"
+                },
+                "imsi": {
+                    "type": "string"
+                },
+                "btMacAddress": {
+                    "maxLength": 17,
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "lastConnection": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "firstSeen": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "mode": {
+                    "default": "default",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "batteryVoltage": {
+                    "type": "number",
+                    "format": ""
+                },
+                "currentMode": {
+                    "type": "number",
+                    "format": ""
+                },
+                "color": {
+                    "default": "ce0027",
+                    "type": "string"
+                },
+                "saveToWeb": {
+                    "default": 0,
+                    "type": "boolean"
+                },
+                "expires": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "active": {
+                    "default": 0,
+                    "type": "boolean"
+                },
+                "deepSleep": {
+                    "default": 0,
+                    "type": "boolean"
+                },
+                "simstate": {
+                    "default": "active",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "number",
+                    "format": ""
+                },
+                "ownerId": {
+                    "type": "number",
+                    "format": ""
+                },
+                "securePhoneId": {
+                    "type": "number",
+                    "format": ""
+                }
+            },
+            "required": [
+                "imei",
+                "iccid",
+                "firstSeen",
+                "mode"
+            ],
+            "additionalProperties": false
+        },
+        "accessToken": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "ttl": {
+                    "default": 1209600,
+                    "description": "time to live in seconds (2 weeks by default)",
+                    "type": "number",
+                    "format": ""
+                },
+                "created": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "userId": {
+                    "type": "number",
+                    "format": ""
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "additionalProperties": false
+        },
+        "GeoPoint": {
+            "properties": {
+                "lat": {
+                    "type": "number"
+                },
+                "lng": {
+                    "type": "number"
+                }
+            }
+        },
+        "credentials": {
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "host": "cp.remotethings.co.uk",
+    "schemes": [
+        "https"
+    ]
+}
