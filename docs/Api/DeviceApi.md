@@ -5,10 +5,12 @@ All URIs are relative to *https://cp.remotethings.co.uk/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**deviceFindById**](DeviceApi.md#deviceFindById) | **GET** /devices/{id} | Find a model instance by {{id}} from the data source.
+[**devicePrototypeCreateConfig**](DeviceApi.md#devicePrototypeCreateConfig) | **POST** /devices/{id}/config | Creates a new instance in config of this model.
 [**devicePrototypeDestroyByIdPoints**](DeviceApi.md#devicePrototypeDestroyByIdPoints) | **DELETE** /devices/{id}/points/{fk} | Delete a specific point for a device
 [**devicePrototypeFindByIdPoints**](DeviceApi.md#devicePrototypeFindByIdPoints) | **GET** /devices/{id}/points/{fk} | Retrieve a specific point for a device
 [**devicePrototypeGetConfig**](DeviceApi.md#devicePrototypeGetConfig) | **GET** /devices/{id}/config | Retrieve configuration for a device
 [**devicePrototypeGetPoints**](DeviceApi.md#devicePrototypeGetPoints) | **GET** /devices/{id}/points | Retrieve points for a device
+[**devicePrototypeSetSafeZone**](DeviceApi.md#devicePrototypeSetSafeZone) | **POST** /devices/{id}/setSafeZone | Update safe-zone for device
 [**devicePrototypeUpdateConfig**](DeviceApi.md#devicePrototypeUpdateConfig) | **PUT** /devices/{id}/config | Update configuration for a device
 
 
@@ -45,6 +47,51 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Swagger\Client\Model\Device**](../Model/Device.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, application/xml, text/xml
+ - **Accept**: application/json, application/xml, text/xml, application/javascript, text/javascript
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **devicePrototypeCreateConfig**
+> \Swagger\Client\Model\DeviceConfig devicePrototypeCreateConfig($id, $data)
+
+Creates a new instance in config of this model.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\DeviceApi();
+$id = 3.4; // float | device id
+$data = new \Swagger\Client\Model\DeviceConfig(); // \Swagger\Client\Model\DeviceConfig | Body (JSON)
+
+try {
+    $result = $api_instance->devicePrototypeCreateConfig($id, $data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DeviceApi->devicePrototypeCreateConfig: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **float**| device id |
+ **data** | [**\Swagger\Client\Model\DeviceConfig**](../Model/DeviceConfig.md)| Body (JSON) | [optional]
+
+### Return type
+
+[**\Swagger\Client\Model\DeviceConfig**](../Model/DeviceConfig.md)
 
 ### Authorization
 
@@ -224,6 +271,51 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Swagger\Client\Model\Datapoint[]**](../Model/Datapoint.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, application/xml, text/xml
+ - **Accept**: application/json, application/xml, text/xml, application/javascript, text/javascript
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **devicePrototypeSetSafeZone**
+> object devicePrototypeSetSafeZone($data, $id)
+
+Update safe-zone for device
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\Api\DeviceApi();
+$data = array(new \Swagger\Client\Model\GeoPoint()); // \Swagger\Client\Model\GeoPoint[] | Array of {lat:x,lng:y} points denoting the vertices of the safe-zone
+$id = 3.4; // float | device id
+
+try {
+    $result = $api_instance->devicePrototypeSetSafeZone($data, $id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DeviceApi->devicePrototypeSetSafeZone: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**\Swagger\Client\Model\GeoPoint[]**](../Model/GeoPoint.md)| Array of {lat:x,lng:y} points denoting the vertices of the safe-zone |
+ **id** | **float**| device id |
+
+### Return type
+
+**object**
 
 ### Authorization
 

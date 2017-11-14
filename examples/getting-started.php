@@ -54,6 +54,7 @@ $point_filter = (object)[
     //"limit" => 5 // limit to the last (newest) 5 points
 ];
 
+// Get the points
 foreach($devices as $device){
     try {
         $points = $device_api->devicePrototypeGetPoints($device->getId(), $point_filter);

@@ -540,6 +540,181 @@ class DeviceApi
     }
 
     /**
+     * Operation devicePrototypeGetSafeZone
+     *
+     * Get safe-zone for device
+     *
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return \Swagger\Client\Model\Geofence
+     */
+    public function devicePrototypeGetSafeZone($id)
+    {
+        list($response) = $this->devicePrototypeGetSafeZoneWithHttpInfo($id);
+        return $response;
+    }
+
+    /**
+     * Operation devicePrototypeGetSafeZoneWithHttpInfo
+     *
+     * Get safe-zone for device
+     *
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return array of \Swagger\Client\Model\Geofence, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function devicePrototypeGetSafeZoneWithHttpInfo($id)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $id when calling devicePrototypeGetSafeZone');
+        }
+        // parse inputs
+        $resourcePath = "/devices/{id}/getSafeZone";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json', 'application/xml', 'text/xml', 'application/javascript', 'text/javascript']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'application/x-www-form-urlencoded', 'application/xml', 'text/xml']);
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                "{" . "id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($id),
+                $resourcePath
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Swagger\Client\Model\Geofence',
+                '/devices/{id}/getSafeZone'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\Geofence', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\Geofence', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation devicePrototypeSetSafeZone
+     *
+     * Update safe-zone for device
+     *
+     * @param \Swagger\Client\Model\GeoPoint[] $data Array of {lat:x,lng:y} points denoting the vertices of the safe-zone (required)
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return \Swagger\Client\Model\Geofence
+     */
+    public function devicePrototypeSetSafeZone($data, $id)
+    {
+        list($response) = $this->devicePrototypeSetSafeZoneWithHttpInfo($data, $id);
+        return $response;
+    }
+
+    /**
+     * Operation devicePrototypeSetSafeZoneWithHttpInfo
+     *
+     * Update safe-zone for device
+     *
+     * @param \Swagger\Client\Model\GeoPoint[] $data Array of {lat:x,lng:y} points denoting the vertices of the safe-zone (required)
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return array of \Swagger\Client\Model\Geofence, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function devicePrototypeSetSafeZoneWithHttpInfo($data, $id)
+    {
+        // verify the required parameter 'data' is set
+        if ($data === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $data when calling devicePrototypeSetSafeZone');
+        }
+        // verify the required parameter 'id' is set
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $id when calling devicePrototypeSetSafeZone');
+        }
+        // parse inputs
+        $resourcePath = "/devices/{id}/setSafeZone";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json', 'application/xml', 'text/xml', 'application/javascript', 'text/javascript']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'application/x-www-form-urlencoded', 'application/xml', 'text/xml']);
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                "{" . "id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($id),
+                $resourcePath
+            );
+        }
+        // body params
+        $_tempBody = null;
+        if (isset($data)) {
+            $_tempBody = $data;
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'POST',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Swagger\Client\Model\Geofence',
+                '/devices/{id}/setSafeZone'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\Geofence', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\Geofence', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation devicePrototypeUpdateConfig
      *
      * Update configuration for a device
