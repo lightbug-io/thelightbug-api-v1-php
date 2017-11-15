@@ -40,14 +40,21 @@ try {
     die();
 }
 
-// Timestamp for 2 days ago:
-$twoDaysAgo = (new DateTime())->sub(new DateInterval("P2D"))->getTimestamp();
+// Setup the time period we are interested in
+$earliestTime = new DateTime( "2017-01-01 15:00:00", new DateTimeZone("America/Los_Angeles"));
+$latestTime = new DateTime( "2018-01-01 15:00:00", new DateTimeZone("America/Los_Angeles"));
+
+// we could also set the earliest and latest times to be relative to current time
+//$earliestTime = (new DateTime())->sub(new DateInterval("P2D")); - substract 2 days (P2D) from the current time
+//$latestTime = new DateTime(); // NOW
+
+
 // Set up the filter for the points we want
 $point_filter = (object)[
     "where" => [
         "and" => [ // get last 2 days of data. note timestamp is Unix timestamp in milliseconds
-            ["timestamp" => ["gt" => $twoDaysAgo*1000]], // from 2 days ago
-            ["timestamp" => ["lt" => (new DateTime())->getTimestamp()*1000]] // to now
+            ["timestamp" => ["gt" => $earliestTime->getTimestamp()*1000]], // from 2 days ago
+            ["timestamp" => ["lt" => $latestTime->getTimestamp()*1000]] // to now
         ]
     ],
     "order" => "timestamp DESC", // order the points in reverse order (newest first)
@@ -61,7 +68,9 @@ foreach($devices as $device){
         echo '<h3>Points for device '. $device->getName().'</h3>';
         foreach($points as $point){
             if($point->getLocationType() !== 'invalid' && $point->getLocation()) {
-                echo '<b>'.$point->getTimestamp()->format('Y-m-d H:i:s') . ':</b> [' . $point->getLocation()->getLat() . ',' . $point->getLocation()->getLng() . ']';
+                $date = $point->getTimestamp();
+                $date->setTimezone(new DateTimeZone("America/Los_Angeles")); // localise the timestamp
+                echo '<b>'. $date->format('Y-m-d H:i:s') . ':</b> [' . $point->getLocation()->getLat() . ',' . $point->getLocation()->getLng() . ']';
                 if ($point->getAddress()) echo ' - ' . $point->getAddress();
                 // $point->getSpeed ... , see lib/Model/Datapoint.php
                 echo "<br>";
