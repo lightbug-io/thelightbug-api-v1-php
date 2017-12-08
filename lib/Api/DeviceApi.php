@@ -176,6 +176,173 @@ class DeviceApi
     }
 
     /**
+     * Operation devicePrototypeCreateNotificationTriggers
+     *
+     * Create alert/notification trigger for device
+     *
+     * @param float $id device id (required)
+     * @param \Swagger\Client\Model\NotificationTrigger $data Body (JSON) (optional)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return \Swagger\Client\Model\NotificationTrigger
+     */
+    public function devicePrototypeCreateNotificationTriggers($id, $data = null)
+    {
+        list($response) = $this->devicePrototypeCreateNotificationTriggersWithHttpInfo($id, $data);
+        return $response;
+    }
+
+    /**
+     * Operation devicePrototypeCreateNotificationTriggersWithHttpInfo
+     *
+     * Create alert/notification trigger for device
+     *
+     * @param float $id device id (required)
+     * @param \Swagger\Client\Model\NotificationTrigger $data Body (JSON) (optional)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return array of \Swagger\Client\Model\NotificationTrigger, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function devicePrototypeCreateNotificationTriggersWithHttpInfo($id, $data = null)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $id when calling devicePrototypeCreateNotificationTriggers');
+        }
+        // parse inputs
+        $resourcePath = "/devices/{id}/notificationTriggers";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json', 'application/xml', 'text/xml', 'application/javascript', 'text/javascript']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'application/x-www-form-urlencoded', 'application/xml', 'text/xml']);
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                "{" . "id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($id),
+                $resourcePath
+            );
+        }
+        // body params
+        $_tempBody = null;
+        if (isset($data)) {
+            $_tempBody = $data;
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'POST',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Swagger\Client\Model\NotificationTrigger',
+                '/devices/{id}/notificationTriggers'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\NotificationTrigger', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\NotificationTrigger', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation devicePrototypeDeleteNotificationTriggers
+     *
+     * Remove all alert/notification trigger for device
+     *
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return void
+     */
+    public function devicePrototypeDeleteNotificationTriggers($id)
+    {
+        list($response) = $this->devicePrototypeDeleteNotificationTriggersWithHttpInfo($id);
+        return $response;
+    }
+
+    /**
+     * Operation devicePrototypeDeleteNotificationTriggersWithHttpInfo
+     *
+     * Remove all alert/notification trigger for device
+     *
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function devicePrototypeDeleteNotificationTriggersWithHttpInfo($id)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $id when calling devicePrototypeDeleteNotificationTriggers');
+        }
+        // parse inputs
+        $resourcePath = "/devices/{id}/notificationTriggers";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json', 'application/xml', 'text/xml', 'application/javascript', 'text/javascript']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'application/x-www-form-urlencoded', 'application/xml', 'text/xml']);
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                "{" . "id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($id),
+                $resourcePath
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'DELETE',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                null,
+                '/devices/{id}/notificationTriggers'
+            );
+
+            return [null, $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation devicePrototypeDestroyByIdPoints
      *
      * Delete a specific point for a device
@@ -452,6 +619,94 @@ class DeviceApi
     }
 
     /**
+     * Operation devicePrototypeGetNotificationTriggers
+     *
+     * Get alerts for device
+     *
+     * @param float $id device id (required)
+     * @param string $filter JSON Filter object (optional)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return \Swagger\Client\Model\NotificationTrigger[]
+     */
+    public function devicePrototypeGetNotificationTriggers($id, $filter = null)
+    {
+        list($response) = $this->devicePrototypeGetNotificationTriggersWithHttpInfo($id, $filter);
+        return $response;
+    }
+
+    /**
+     * Operation devicePrototypeGetNotificationTriggersWithHttpInfo
+     *
+     * Get alerts for device
+     *
+     * @param float $id device id (required)
+     * @param string $filter JSON Filter object (optional)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return array of \Swagger\Client\Model\NotificationTrigger[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function devicePrototypeGetNotificationTriggersWithHttpInfo($id, $filter = null)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $id when calling devicePrototypeGetNotificationTriggers');
+        }
+        // parse inputs
+        $resourcePath = "/devices/{id}/notificationTriggers";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json', 'application/xml', 'text/xml', 'application/javascript', 'text/javascript']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'application/x-www-form-urlencoded', 'application/xml', 'text/xml']);
+
+        // query params
+        if ($filter !== null) {
+            $queryParams['filter'] = $this->apiClient->getSerializer()->toQueryValue($filter);
+        }
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                "{" . "id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($id),
+                $resourcePath
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Swagger\Client\Model\NotificationTrigger[]',
+                '/devices/{id}/notificationTriggers'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\NotificationTrigger[]', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\NotificationTrigger[]', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation devicePrototypeGetPoints
      *
      * Retrieve points for a device
@@ -715,6 +970,88 @@ class DeviceApi
     }
 
     /**
+     * Operation devicePrototypeSleep
+     *
+     * Send sleep instruction to device
+     *
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return object
+     */
+    public function devicePrototypeSleep($id)
+    {
+        list($response) = $this->devicePrototypeSleepWithHttpInfo($id);
+        return $response;
+    }
+
+    /**
+     * Operation devicePrototypeSleepWithHttpInfo
+     *
+     * Send sleep instruction to device
+     *
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function devicePrototypeSleepWithHttpInfo($id)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $id when calling devicePrototypeSleep');
+        }
+        // parse inputs
+        $resourcePath = "/devices/{id}/sleep";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json', 'application/xml', 'text/xml', 'application/javascript', 'text/javascript']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'application/x-www-form-urlencoded', 'application/xml', 'text/xml']);
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                "{" . "id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($id),
+                $resourcePath
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                'object',
+                '/devices/{id}/sleep'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, 'object', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'object', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation devicePrototypeUpdateConfig
      *
      * Update configuration for a device
@@ -795,6 +1132,88 @@ class DeviceApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\DeviceConfig', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation devicePrototypeWakeUp
+     *
+     * Send wake instruction to device
+     *
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return object
+     */
+    public function devicePrototypeWakeUp($id)
+    {
+        list($response) = $this->devicePrototypeWakeUpWithHttpInfo($id);
+        return $response;
+    }
+
+    /**
+     * Operation devicePrototypeWakeUpWithHttpInfo
+     *
+     * Send wake instruction to device
+     *
+     * @param float $id device id (required)
+     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function devicePrototypeWakeUpWithHttpInfo($id)
+    {
+        // verify the required parameter 'id' is set
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $id when calling devicePrototypeWakeUp');
+        }
+        // parse inputs
+        $resourcePath = "/devices/{id}/wakeUp";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json', 'application/xml', 'text/xml', 'application/javascript', 'text/javascript']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['application/json', 'application/x-www-form-urlencoded', 'application/xml', 'text/xml']);
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                "{" . "id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($id),
+                $resourcePath
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                'object',
+                '/devices/{id}/wakeUp'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, 'object', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'object', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }

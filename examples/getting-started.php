@@ -1,35 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Chris
- * Date: 13/11/2017
- * Time: 09:18
- */
 
+//Imports
+use Swagger\Client\Helpers;
 require_once(__DIR__ . '/../autoload.php');
 
+// Create our api clients
 $user_api = new Swagger\Client\Api\UserApi();
 $device_api= new Swagger\Client\Api\DeviceApi();
-$credentials = new \Swagger\Client\Model\Credentials([
-    "username"=>"", //enter username here
-    "password"=>"" // enter password
-]);
 
-$token = null; // the access token, default ttl is 2 weeks
-$userId = null;
+// Enter login details here
+const USERNAME = '';
+const PASSWORD = '';
 
-// Login
-try {
-    $result = $user_api->userLogin($credentials);
-    $token = $result->getId(); // store the token
-    //use the token for all further requests
-    $user_api->getApiClient()->getConfig()->addDefaultHeader("Authorization", $token);
-    $userId = $result->getUserId(); // store the users id
+// Use details to login
+$token = Helpers::login(USERNAME, PASSWORD);// we can also reuse an application wide token, default ttl is 2 weeks
+$userId = $token->getUserId();  // store user ID
 
-} catch (Exception $e) {
-    echo 'Problem logging in ', $e->getMessage(), PHP_EOL;
-    die();
-}
+//Authenticate our clients with the returned acess token
+$user_api->getApiClient()->getConfig()->addDefaultHeader("Authorization", $token->getId());
+$device_api->getApiClient()->getConfig()->addDefaultHeader("Authorization", $token->getId());
 
 //Get devices on the account:
 $devices = [];
