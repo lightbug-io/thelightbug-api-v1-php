@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **mode** | **string** |  | [default to 'default']
 **name** | **string** |  | [optional] 
 **battery_voltage** | **float** |  | [optional] 
+**tags** | **string[]** |  | [optional] 
 **current_mode** | **float** |  | [optional] 
 **color** | **string** |  | [optional] [default to 'ce0027']
 **save_to_web** | **bool** |  | [optional] [default to false]

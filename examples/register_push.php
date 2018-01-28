@@ -17,6 +17,7 @@ const PASSWORD = '';
 
 //enter the location of your push receiver
 const PUSH_ENDPOINT = 'https://example.com/push/examples/push_receiver.php';
+const READING_PUSH_ENDPOINT = 'https://example.com/push/examples/reading_push_receiver.php';
 // the email address to notify of new wake points
 const EMAIL_NOTIFY = '';
 
@@ -46,14 +47,17 @@ $device = $devices[0];
 $current_alerts = $device_api->devicePrototypeGetNotificationTriggers($device->getId());
 
 $http_alert_name = "HTTP Alert 1";
+$http_reading_push_name = "HTTP Reading Push";
 $http_email_name = "EMAIL Alert 1";
 
 // Check to see if the alerts have already been created
 $http_alert_exists = false;
 $email_alert_exists = false;
+$http_reading_alert_exists = false;
 foreach($current_alerts as $alert){
     if($alert->getName() == $http_alert_name) $http_alert_exists = true;
     else if($alert->getName() == $http_email_name) $email_alert_exists = true;
+    else if($alert->getName() == $http_reading_push_name) $http_reading_alert_exists = true;
 }
 
 //Create the missing alerts if required
@@ -67,6 +71,18 @@ if(!$http_alert_exists) {
 
     $res = $device_api->devicePrototypeCreateNotificationTriggers($device->getId(), $newAlert);
     echo "created http alert". PHP_EOL;
+}
+
+if(!$http_reading_alert_exists) {
+    $newAlert = new NotificationTrigger([
+        "name" => $http_reading_push_name,
+        "type" => constants::NOTIFICATION_TYPE_ALL_NEW_READINGS,
+        "parameters" => ["endpoint" => READING_PUSH_ENDPOINT],
+        "delivery" => ["http" => true]
+    ]);
+
+    $res = $device_api->devicePrototypeCreateNotificationTriggers($device->getId(), $newAlert);
+    echo "created reading alert". PHP_EOL;
 }
 
 if(!$email_alert_exists) {

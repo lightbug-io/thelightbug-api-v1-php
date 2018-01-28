@@ -144,6 +144,42 @@
                 "deprecated": false
             }
         },
+        "/devices/{id}/readings/{fk}": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Retrieve a specific reading for a device",
+                "operationId": "device.prototype.__findById__readings",
+                "parameters": [
+                    {
+                        "name": "fk",
+                        "in": "path",
+                        "description": "Foreign key for readings",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/sensorReading"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
         "/devices/{id}/points": {
             "get": {
                 "tags": [
@@ -178,6 +214,142 @@
                                 "$ref": "#/definitions/datapoint"
                             }
                         }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/devices/{id}/readings": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Retrieve readings for a device",
+                "operationId": "device.prototype.__get__readings",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "description": "JSON Filter object",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/sensorReading"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/devices/{id}/notificationTriggers": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Get alerts for device",
+                "operationId": "device.prototype.__get__notificationTriggers",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "description": "JSON Filter object",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/notificationTrigger"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Create alert/notification trigger for device",
+                "operationId": "device.prototype.__create__notificationTriggers",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/notificationTrigger"
+                        },
+                        "description": "Body (JSON)"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/notificationTrigger"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "device"
+                ],
+                "summary": "Remove all alert/notification trigger for device",
+                "operationId": "device.prototype.__delete__notificationTriggers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request was successful"
                     }
                 },
                 "deprecated": false
@@ -219,6 +391,254 @@
                 "deprecated": false
             }
         },
+        "/devices/{id}/wakeUp": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "operationId": "device.prototype.wakeUp",
+                "parameters": [
+                    {
+                        "name": "duration",
+                        "in": "query",
+                        "required": false,
+                        "type": "number",
+                        "format": ""
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "summary": "Send wake instruction to device"
+            }
+        },
+        "/devices/{id}/sleep": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "operationId": "device.prototype.sleep",
+                "parameters": [
+                    {
+                        "name": "duration",
+                        "in": "query",
+                        "required": false,
+                        "type": "number",
+                        "format": ""
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "summary": "Send sleep instruction to device"
+            }
+        },
+        "/devices/{id}/setSafeZone": {
+            "post": {
+                "tags": [
+                    "device"
+                ],
+                "operationId": "device.prototype.setSafeZone",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/GeoPoint"
+                            }
+                        },
+                        "description": "Array of {lat:x,lng:y} points denoting the vertices of the safe-zone"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/geofence"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "summary": "Update safe-zone for device"
+            }
+        },
+        "/devices/{id}/getSafeZone": {
+            "get": {
+                "tags": [
+                    "device"
+                ],
+                "operationId": "device.prototype.getSafeZone",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "device id",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/geofence"
+                        }
+                    }
+                },
+                "deprecated": false,
+                "summary": "Get safe-zone for device"
+            }
+        },
+        "/users/{id}/geofences/{fk}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Find a related item by id for geofences.",
+                "operationId": "user.prototype.__findById__geofences",
+                "parameters": [
+                    {
+                        "name": "fk",
+                        "in": "path",
+                        "description": "Foreign key for geofences",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/geofence"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Delete a related item by id for geofences.",
+                "operationId": "user.prototype.__destroyById__geofences",
+                "parameters": [
+                    {
+                        "name": "fk",
+                        "in": "path",
+                        "description": "Foreign key for geofences",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request was successful"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update a related item by id for geofences.",
+                "operationId": "user.prototype.__updateById__geofences",
+                "parameters": [
+                    {
+                        "name": "fk",
+                        "in": "path",
+                        "description": "Foreign key for geofences",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/geofence"
+                        },
+                        "description": "Body (JSON)"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/geofence"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
         "/users/{id}/devices": {
             "get": {
                 "tags": [
@@ -253,6 +673,103 @@
                                 "$ref": "#/definitions/device"
                             }
                         }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/users/{id}/geofences": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Queries geofences of user.",
+                "operationId": "user.prototype.__get__geofences",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "description": "JSON Filter object",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/geofence"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Creates a new instance in geofences of this model.",
+                "operationId": "user.prototype.__create__geofences",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/geofence"
+                        },
+                        "description": "Body (JSON)"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Body (JSON)",
+                        "schema": {
+                            "$ref": "#/definitions/geofence"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Deletes all geofences of this model.",
+                "operationId": "user.prototype.__delete__geofences",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Request was successful"
                     }
                 },
                 "deprecated": false
@@ -580,6 +1097,10 @@
                 "deviceId": {
                     "type": "number",
                     "format": ""
+                },
+                "safeZoneId": {
+                    "type": "number",
+                    "format": ""
                 }
             },
             "required": [
@@ -590,6 +1111,58 @@
                 "wakeAction",
                 "onDemandTime",
                 "alertAction"
+            ],
+            "additionalProperties": false
+        },
+        "sensorReading": {
+            "properties": {
+                "timestamp": {
+                    "description": "Timestamp for the reading",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "created": {
+                    "description": "Timestamp for the writing to db",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "type": {
+                    "description": "Sensor type: 'ultra' (fill level), 'temp' (temperature), ...",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "JSON value",
+                    "type": "object"
+                },
+                "meta": {
+                    "description": "JSON metadata",
+                    "type": "object"
+                },
+                "id": {
+                    "type": "number",
+                    "format": ""
+                },
+                "gatewayId": {
+                    "type": "number",
+                    "format": ""
+                },
+                "deviceId": {
+                    "type": "number",
+                    "format": ""
+                },
+                "sensorDeviceId": {
+                    "type": "string"
+                },
+                "datapointId": {
+                    "type": "number",
+                    "format": ""
+                }
+            },
+            "required": [
+                "timestamp",
+                "created",
+                "type",
+                "value"
             ],
             "additionalProperties": false
         },
@@ -605,6 +1178,7 @@
                     "type": "object"
                 },
                 "muteFor": {
+                    "default": 0,
                     "type": "number",
                     "format": ""
                 },
@@ -678,6 +1252,12 @@
                     "type": "number",
                     "format": ""
                 },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "currentMode": {
                     "type": "number",
                     "format": ""
@@ -725,6 +1305,55 @@
                 "firstSeen",
                 "mode"
             ],
+            "additionalProperties": false
+        },
+        "geofence": {
+            "properties": {
+                "outline": {
+                    "description": "Array of {lat:x,lng:y} objects representing the vertices of the polygon",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "type": {
+                    "description": "'inside', 'outside' or 'cross'. For device safe-zone the value is ignored (always 'outside')",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "wasInside": {
+                    "default": false,
+                    "description": "If the last point received was inside the geofence. Only updated for notifications (not the safe-zone as that is evaluated on the device)",
+                    "type": "boolean"
+                },
+                "lastChecked": {
+                    "description": "When the geofence was last evaluated. Only updated for notifications (not the safe-zone as that is evaluated on the device)",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "modified": {
+                    "default": false,
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "number",
+                    "format": ""
+                },
+                "deviceId": {
+                    "type": "number",
+                    "format": ""
+                },
+                "configId": {
+                    "type": "number",
+                    "format": ""
+                },
+                "userId": {
+                    "type": "number",
+                    "format": ""
+                }
+            },
             "additionalProperties": false
         },
         "accessToken": {

@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **alert_action** | **string** | What to do when the button is pressed or the unit is dropped. Options are &#39;available&#39; (stay registered on the mobile network), &#39;nothing&#39; (one transmission) and  &#39;lockOn&#39; (keep transmitting at &#39;interval&#39; until instructed otherwise | [default to 'nothing']
 **id** | **float** |  | [optional] 
 **device_id** | **float** |  | [optional] 
+**safe_zone_id** | **float** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

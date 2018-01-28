@@ -17,6 +17,7 @@ class constants
 
 
     const NOTIFICATION_TYPE_ALL_NEW_POINTS = 'newLoc';
+    const NOTIFICATION_TYPE_ALL_NEW_READINGS = 'newReading';
     const NOTIFICATION_TYPE_WAKE_POINTS_ONLY = 'newWakeLoc'; // note this includes "available" locations
 
 }

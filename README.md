@@ -24,14 +24,12 @@ To register for HTTP push, see register_push.php and push_receiver.php
  - edit PUSH_ENDPOINT in register_push to match the URL, and enter login details for the account
  - run php register_push.php once to register your endpoint for push notifications
 
-?>
 
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://cp.remotethings.co.uk/api*
 
 For extended method documentation, see *http://cp.remotethings.co.uk/docs/*
-
 
 
 ## Documentation For Models
@@ -43,6 +41,8 @@ For extended method documentation, see *http://cp.remotethings.co.uk/docs/*
  - [DeviceConfig](docs/Model/DeviceConfig.md)
  - [GeoPoint](docs/Model/GeoPoint.md)
  - [NotificationTrigger](docs/Model/NotificationTrigger.md)
+ - [SensorReading](docs/Model/SensorReading.md)
+
 
 
 ## Documentation For Authorization

@@ -82,7 +82,8 @@ class DeviceConfig implements ArrayAccess
         'on_demand_time' => 'float',
         'alert_action' => 'string',
         'id' => 'float',
-        'device_id' => 'float'
+        'device_id' => 'float',
+        'safe_zone_id' => 'float'
     ];
 
     /**
@@ -118,7 +119,8 @@ class DeviceConfig implements ArrayAccess
         'on_demand_time' => '',
         'alert_action' => null,
         'id' => '',
-        'device_id' => ''
+        'device_id' => '',
+        'safe_zone_id' => ''
     ];
 
     public static function swaggerTypes()
@@ -164,7 +166,8 @@ class DeviceConfig implements ArrayAccess
         'on_demand_time' => 'onDemandTime',
         'alert_action' => 'alertAction',
         'id' => 'id',
-        'device_id' => 'deviceId'
+        'device_id' => 'deviceId',
+        'safe_zone_id' => 'safeZoneId'
     ];
 
 
@@ -201,7 +204,8 @@ class DeviceConfig implements ArrayAccess
         'on_demand_time' => 'setOnDemandTime',
         'alert_action' => 'setAlertAction',
         'id' => 'setId',
-        'device_id' => 'setDeviceId'
+        'device_id' => 'setDeviceId',
+        'safe_zone_id' => 'setSafeZoneId'
     ];
 
 
@@ -238,7 +242,8 @@ class DeviceConfig implements ArrayAccess
         'on_demand_time' => 'getOnDemandTime',
         'alert_action' => 'getAlertAction',
         'id' => 'getId',
-        'device_id' => 'getDeviceId'
+        'device_id' => 'getDeviceId',
+        'safe_zone_id' => 'getSafeZoneId'
     ];
 
     public static function attributeMap()
@@ -301,6 +306,7 @@ class DeviceConfig implements ArrayAccess
         $this->container['alert_action'] = isset($data['alert_action']) ? $data['alert_action'] : 'nothing';
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['device_id'] = isset($data['device_id']) ? $data['device_id'] : null;
+        $this->container['safe_zone_id'] = isset($data['safe_zone_id']) ? $data['safe_zone_id'] : null;
     }
 
     /**
@@ -986,6 +992,27 @@ class DeviceConfig implements ArrayAccess
     public function setDeviceId($device_id)
     {
         $this->container['device_id'] = $device_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets safe_zone_id
+     * @return float
+     */
+    public function getSafeZoneId()
+    {
+        return $this->container['safe_zone_id'];
+    }
+
+    /**
+     * Sets safe_zone_id
+     * @param float $safe_zone_id
+     * @return $this
+     */
+    public function setSafeZoneId($safe_zone_id)
+    {
+        $this->container['safe_zone_id'] = $safe_zone_id;
 
         return $this;
     }

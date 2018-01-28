@@ -1,6 +1,6 @@
 <?php
 /**
- * Geofence
+ * SensorReading
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ namespace Swagger\Client\Model;
 use \ArrayAccess;
 
 /**
- * Geofence Class Doc Comment
+ * SensorReading Class Doc Comment
  *
  * @category    Class
  * @package     Swagger\Client
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class Geofence implements ArrayAccess
+class SensorReading implements ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,23 +47,23 @@ class Geofence implements ArrayAccess
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'geofence';
+    protected static $swaggerModelName = 'sensorReading';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'outline' => 'object[]',
+        'timestamp' => '\DateTime',
+        'created' => '\DateTime',
         'type' => 'string',
-        'name' => 'string',
-        'was_inside' => 'bool',
-        'last_checked' => '\DateTime',
-        'modified' => 'bool',
+        'value' => 'object',
+        'meta' => 'object',
         'id' => 'float',
+        'gateway_id' => 'float',
         'device_id' => 'float',
-        'config_id' => 'float',
-        'user_id' => 'float'
+        'sensor_device_id' => 'string',
+        'datapoint_id' => 'float'
     ];
 
     /**
@@ -71,16 +71,16 @@ class Geofence implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'outline' => null,
+        'timestamp' => 'date-time',
+        'created' => 'date-time',
         'type' => null,
-        'name' => null,
-        'was_inside' => null,
-        'last_checked' => 'date-time',
-        'modified' => null,
+        'value' => null,
+        'meta' => null,
         'id' => '',
+        'gateway_id' => '',
         'device_id' => '',
-        'config_id' => '',
-        'user_id' => ''
+        'sensor_device_id' => null,
+        'datapoint_id' => ''
     ];
 
     public static function swaggerTypes()
@@ -98,16 +98,16 @@ class Geofence implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'outline' => 'outline',
+        'timestamp' => 'timestamp',
+        'created' => 'created',
         'type' => 'type',
-        'name' => 'name',
-        'was_inside' => 'wasInside',
-        'last_checked' => 'lastChecked',
-        'modified' => 'modified',
+        'value' => 'value',
+        'meta' => 'meta',
         'id' => 'id',
+        'gateway_id' => 'gatewayId',
         'device_id' => 'deviceId',
-        'config_id' => 'configId',
-        'user_id' => 'userId'
+        'sensor_device_id' => 'sensorDeviceId',
+        'datapoint_id' => 'datapointId'
     ];
 
 
@@ -116,16 +116,16 @@ class Geofence implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'outline' => 'setOutline',
+        'timestamp' => 'setTimestamp',
+        'created' => 'setCreated',
         'type' => 'setType',
-        'name' => 'setName',
-        'was_inside' => 'setWasInside',
-        'last_checked' => 'setLastChecked',
-        'modified' => 'setModified',
+        'value' => 'setValue',
+        'meta' => 'setMeta',
         'id' => 'setId',
+        'gateway_id' => 'setGatewayId',
         'device_id' => 'setDeviceId',
-        'config_id' => 'setConfigId',
-        'user_id' => 'setUserId'
+        'sensor_device_id' => 'setSensorDeviceId',
+        'datapoint_id' => 'setDatapointId'
     ];
 
 
@@ -134,16 +134,16 @@ class Geofence implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'outline' => 'getOutline',
+        'timestamp' => 'getTimestamp',
+        'created' => 'getCreated',
         'type' => 'getType',
-        'name' => 'getName',
-        'was_inside' => 'getWasInside',
-        'last_checked' => 'getLastChecked',
-        'modified' => 'getModified',
+        'value' => 'getValue',
+        'meta' => 'getMeta',
         'id' => 'getId',
+        'gateway_id' => 'getGatewayId',
         'device_id' => 'getDeviceId',
-        'config_id' => 'getConfigId',
-        'user_id' => 'getUserId'
+        'sensor_device_id' => 'getSensorDeviceId',
+        'datapoint_id' => 'getDatapointId'
     ];
 
     public static function attributeMap()
@@ -177,16 +177,16 @@ class Geofence implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['outline'] = isset($data['outline']) ? $data['outline'] : null;
+        $this->container['timestamp'] = isset($data['timestamp']) ? $data['timestamp'] : null;
+        $this->container['created'] = isset($data['created']) ? $data['created'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['was_inside'] = isset($data['was_inside']) ? $data['was_inside'] : false;
-        $this->container['last_checked'] = isset($data['last_checked']) ? $data['last_checked'] : null;
-        $this->container['modified'] = isset($data['modified']) ? $data['modified'] : false;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['gateway_id'] = isset($data['gateway_id']) ? $data['gateway_id'] : null;
         $this->container['device_id'] = isset($data['device_id']) ? $data['device_id'] : null;
-        $this->container['config_id'] = isset($data['config_id']) ? $data['config_id'] : null;
-        $this->container['user_id'] = isset($data['user_id']) ? $data['user_id'] : null;
+        $this->container['sensor_device_id'] = isset($data['sensor_device_id']) ? $data['sensor_device_id'] : null;
+        $this->container['datapoint_id'] = isset($data['datapoint_id']) ? $data['datapoint_id'] : null;
     }
 
     /**
@@ -198,6 +198,18 @@ class Geofence implements ArrayAccess
     {
         $invalid_properties = [];
 
+        if ($this->container['timestamp'] === null) {
+            $invalid_properties[] = "'timestamp' can't be null";
+        }
+        if ($this->container['created'] === null) {
+            $invalid_properties[] = "'created' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalid_properties[] = "'type' can't be null";
+        }
+        if ($this->container['value'] === null) {
+            $invalid_properties[] = "'value' can't be null";
+        }
         return $invalid_properties;
     }
 
@@ -210,27 +222,60 @@ class Geofence implements ArrayAccess
     public function valid()
     {
 
+        if ($this->container['timestamp'] === null) {
+            return false;
+        }
+        if ($this->container['created'] === null) {
+            return false;
+        }
+        if ($this->container['type'] === null) {
+            return false;
+        }
+        if ($this->container['value'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /**
-     * Gets outline
-     * @return object[]
+     * Gets timestamp
+     * @return \DateTime
      */
-    public function getOutline()
+    public function getTimestamp()
     {
-        return $this->container['outline'];
+        return $this->container['timestamp'];
     }
 
     /**
-     * Sets outline
-     * @param object[] $outline Array of {lat:x,lng:y} objects representing the vertices of the polygon
+     * Sets timestamp
+     * @param \DateTime $timestamp Timestamp for the reading
      * @return $this
      */
-    public function setOutline($outline)
+    public function setTimestamp($timestamp)
     {
-        $this->container['outline'] = $outline;
+        $this->container['timestamp'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets created
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->container['created'];
+    }
+
+    /**
+     * Sets created
+     * @param \DateTime $created Timestamp for the writing to db
+     * @return $this
+     */
+    public function setCreated($created)
+    {
+        $this->container['created'] = $created;
 
         return $this;
     }
@@ -246,7 +291,7 @@ class Geofence implements ArrayAccess
 
     /**
      * Sets type
-     * @param string $type 'inside', 'outside' or 'cross'. For device safe-zone the value is ignored (always 'outside')
+     * @param string $type Sensor type: 'ultra' (fill level), 'temp' (temperature), ...
      * @return $this
      */
     public function setType($type)
@@ -257,85 +302,43 @@ class Geofence implements ArrayAccess
     }
 
     /**
-     * Gets name
-     * @return string
+     * Gets value
+     * @return object
      */
-    public function getName()
+    public function getValue()
     {
-        return $this->container['name'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets name
-     * @param string $name
+     * Sets value
+     * @param object $value JSON value
      * @return $this
      */
-    public function setName($name)
+    public function setValue($value)
     {
-        $this->container['name'] = $name;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets was_inside
-     * @return bool
+     * Gets meta
+     * @return object
      */
-    public function getWasInside()
+    public function getMeta()
     {
-        return $this->container['was_inside'];
+        return $this->container['meta'];
     }
 
     /**
-     * Sets was_inside
-     * @param bool $was_inside If the last point received was inside the geofence. Only updated for notifications (not the safe-zone as that is evaluated on the device)
+     * Sets meta
+     * @param object $meta JSON metadata
      * @return $this
      */
-    public function setWasInside($was_inside)
+    public function setMeta($meta)
     {
-        $this->container['was_inside'] = $was_inside;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_checked
-     * @return \DateTime
-     */
-    public function getLastChecked()
-    {
-        return $this->container['last_checked'];
-    }
-
-    /**
-     * Sets last_checked
-     * @param \DateTime $last_checked When the geofence was last evaluated. Only updated for notifications (not the safe-zone as that is evaluated on the device)
-     * @return $this
-     */
-    public function setLastChecked($last_checked)
-    {
-        $this->container['last_checked'] = $last_checked;
-
-        return $this;
-    }
-
-    /**
-     * Gets modified
-     * @return bool
-     */
-    public function getModified()
-    {
-        return $this->container['modified'];
-    }
-
-    /**
-     * Sets modified
-     * @param bool $modified
-     * @return $this
-     */
-    public function setModified($modified)
-    {
-        $this->container['modified'] = $modified;
+        $this->container['meta'] = $meta;
 
         return $this;
     }
@@ -362,6 +365,27 @@ class Geofence implements ArrayAccess
     }
 
     /**
+     * Gets gateway_id
+     * @return float
+     */
+    public function getGatewayId()
+    {
+        return $this->container['gateway_id'];
+    }
+
+    /**
+     * Sets gateway_id
+     * @param float $gateway_id
+     * @return $this
+     */
+    public function setGatewayId($gateway_id)
+    {
+        $this->container['gateway_id'] = $gateway_id;
+
+        return $this;
+    }
+
+    /**
      * Gets device_id
      * @return float
      */
@@ -383,43 +407,43 @@ class Geofence implements ArrayAccess
     }
 
     /**
-     * Gets config_id
-     * @return float
+     * Gets sensor_device_id
+     * @return string
      */
-    public function getConfigId()
+    public function getSensorDeviceId()
     {
-        return $this->container['config_id'];
+        return $this->container['sensor_device_id'];
     }
 
     /**
-     * Sets config_id
-     * @param float $config_id
+     * Sets sensor_device_id
+     * @param string $sensor_device_id
      * @return $this
      */
-    public function setConfigId($config_id)
+    public function setSensorDeviceId($sensor_device_id)
     {
-        $this->container['config_id'] = $config_id;
+        $this->container['sensor_device_id'] = $sensor_device_id;
 
         return $this;
     }
 
     /**
-     * Gets user_id
+     * Gets datapoint_id
      * @return float
      */
-    public function getUserId()
+    public function getDatapointId()
     {
-        return $this->container['user_id'];
+        return $this->container['datapoint_id'];
     }
 
     /**
-     * Sets user_id
-     * @param float $user_id
+     * Sets datapoint_id
+     * @param float $datapoint_id
      * @return $this
      */
-    public function setUserId($user_id)
+    public function setDatapointId($datapoint_id)
     {
-        $this->container['user_id'] = $user_id;
+        $this->container['datapoint_id'] = $datapoint_id;
 
         return $this;
     }

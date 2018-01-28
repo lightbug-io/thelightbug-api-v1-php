@@ -64,6 +64,7 @@ class Device implements ArrayAccess
         'mode' => 'string',
         'name' => 'string',
         'battery_voltage' => 'float',
+        'tags' => 'string[]',
         'current_mode' => 'float',
         'color' => 'string',
         'save_to_web' => 'bool',
@@ -91,6 +92,7 @@ class Device implements ArrayAccess
         'mode' => null,
         'name' => null,
         'battery_voltage' => '',
+        'tags' => null,
         'current_mode' => '',
         'color' => null,
         'save_to_web' => null,
@@ -128,6 +130,7 @@ class Device implements ArrayAccess
         'mode' => 'mode',
         'name' => 'name',
         'battery_voltage' => 'batteryVoltage',
+        'tags' => 'tags',
         'current_mode' => 'currentMode',
         'color' => 'color',
         'save_to_web' => 'saveToWeb',
@@ -156,6 +159,7 @@ class Device implements ArrayAccess
         'mode' => 'setMode',
         'name' => 'setName',
         'battery_voltage' => 'setBatteryVoltage',
+        'tags' => 'setTags',
         'current_mode' => 'setCurrentMode',
         'color' => 'setColor',
         'save_to_web' => 'setSaveToWeb',
@@ -184,6 +188,7 @@ class Device implements ArrayAccess
         'mode' => 'getMode',
         'name' => 'getName',
         'battery_voltage' => 'getBatteryVoltage',
+        'tags' => 'getTags',
         'current_mode' => 'getCurrentMode',
         'color' => 'getColor',
         'save_to_web' => 'getSaveToWeb',
@@ -237,6 +242,7 @@ class Device implements ArrayAccess
         $this->container['mode'] = isset($data['mode']) ? $data['mode'] : 'default';
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['battery_voltage'] = isset($data['battery_voltage']) ? $data['battery_voltage'] : null;
+        $this->container['tags'] = isset($data['tags']) ? $data['tags'] : null;
         $this->container['current_mode'] = isset($data['current_mode']) ? $data['current_mode'] : null;
         $this->container['color'] = isset($data['color']) ? $data['color'] : 'ce0027';
         $this->container['save_to_web'] = isset($data['save_to_web']) ? $data['save_to_web'] : false;
@@ -526,6 +532,27 @@ class Device implements ArrayAccess
     public function setBatteryVoltage($battery_voltage)
     {
         $this->container['battery_voltage'] = $battery_voltage;
+
+        return $this;
+    }
+
+    /**
+     * Gets tags
+     * @return string[]
+     */
+    public function getTags()
+    {
+        return $this->container['tags'];
+    }
+
+    /**
+     * Sets tags
+     * @param string[] $tags
+     * @return $this
+     */
+    public function setTags($tags)
+    {
+        $this->container['tags'] = $tags;
 
         return $this;
     }
