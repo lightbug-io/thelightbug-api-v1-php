@@ -9,8 +9,8 @@ $user_api = new Swagger\Client\Api\UserApi();
 $device_api= new Swagger\Client\Api\DeviceApi();
 
 // Enter login details here
-const USERNAME = '';
-const PASSWORD = '';
+const USERNAME = 'demo3@demo.com';
+const PASSWORD = 'demo123';
 
 // Use details to login
 $token = Helpers::login(USERNAME, PASSWORD);// we can also reuse an application wide token, default ttl is 2 weeks
@@ -62,6 +62,9 @@ foreach($devices as $device){
                 //$date->setTimezone(new DateTimeZone("America/Los_Angeles")); // localise the timestamp
 
                 $data = $reading->getValue();
+
+                // To access the geo data, retrieve the datapoint by id
+                // $reading->getDatapointId()
 
                 // for type="ultra", the reading->value object has the following properties
                 // - temp: temperature in C
