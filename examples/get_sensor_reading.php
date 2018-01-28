@@ -9,8 +9,8 @@ $user_api = new Swagger\Client\Api\UserApi();
 $device_api= new Swagger\Client\Api\DeviceApi();
 
 // Enter login details here
-const USERNAME = 'demo3@demo.com';
-const PASSWORD = 'demo123';
+const USERNAME = '';
+const PASSWORD = '';
 
 // Use details to login
 $token = Helpers::login(USERNAME, PASSWORD);// we can also reuse an application wide token, default ttl is 2 weeks
@@ -41,10 +41,10 @@ $latestTime = new DateTime( "2018-01-01 15:00:00", new DateTimeZone("America/Los
 // Set up the filter for the points we want
 $point_filter = (object)[
     "where" => [
-        "and" => [ // get last 2 days of data. note timestamp is Unix timestamp in milliseconds
-            ["timestamp" => ["gt" => $earliestTime->getTimestamp()*1000]], // from 2 days ago
-            ["timestamp" => ["lt" => $latestTime->getTimestamp()*1000]] // to now
-        ],
+//        "and" => [ // get last 2 days of data. note timestamp is Unix timestamp in milliseconds
+//            ["timestamp" => ["gt" => $earliestTime->getTimestamp()*1000]], // from 2 days ago
+//            ["timestamp" => ["lt" => $latestTime->getTimestamp()*1000]] // to now
+//        ],
         "type" => "ultra" // only get fill level readings
     ],
     "order" => "timestamp DESC", // order the points in reverse order (newest first)
@@ -55,29 +55,31 @@ $point_filter = (object)[
 foreach($devices as $device){
     try {
         $readings = $device_api->devicePrototypeGetReadings($device->getId(), $point_filter);
-        echo '<h3>Readings for device ' . $device->getName() . '</h3>';
-        foreach ($readings as $reading) {
-            $date = $reading->getTimestamp();
-            //$date->setTimezone(new DateTimeZone("America/Los_Angeles")); // localise the timestamp
+        if(count($readings)>0) {
+            echo '<h3>Readings for device ' . $device->getName() . '</h3>';
+            foreach ($readings as $reading) {
+                $date = $reading->getTimestamp();
+                //$date->setTimezone(new DateTimeZone("America/Los_Angeles")); // localise the timestamp
 
-            $data = $reading->getValue();
+                $data = $reading->getValue();
 
-            // for type="ultra", the reading->value object has the following properties
-            // - temp: temperature in C
-            // - distance: main object distance in mm
-            // - numObjects: the number of objects dectected
-            // - objects: [ //an array of
-            // ---- distance : the distance of this object
-            // ---- time
-            // ---- width
-            // ---- amp
-            // - ]
+                // for type="ultra", the reading->value object has the following properties
+                // - temp: temperature in C
+                // - distance: main object distance in mm
+                // - numObjects: the number of objects dectected
+                // - objects: [ //an array of
+                // ---- distance : the distance of this object
+                // ---- time
+                // ---- width
+                // ---- amp
+                // - ]
 
-            $temp = $data->temp . 'C';
-            $distance = $data->distance . 'mm';
+                $temp = $data['temp'] . 'C';
+                $distance = $data['distance'] . 'mm';
 
-            echo '<b>' . $date->format('Y-m-d H:i:s') . ':</b> '. $temp . ', '. $distance;
-            echo "<br>";
+                echo '<b>' . $date->format('Y-m-d H:i:s') . ':</b> ' . $temp . ', ' . $distance;
+                echo "<br>";
+            }
         }
     } catch (Exception $e) {
         echo 'Failed to get readings for device '. $device->getName(), $e->getMessage(), PHP_EOL;
