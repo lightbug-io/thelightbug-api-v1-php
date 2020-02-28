@@ -1,6 +1,6 @@
 <?php
 /**
- * NotificationTrigger
+ * DeviceTransient
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * NotificationTrigger Class Doc Comment
+ * DeviceTransient Class Doc Comment
  *
  * @category Class
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class NotificationTrigger implements ModelInterface, ArrayAccess
+class DeviceTransient implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'notificationTrigger';
+    protected static $swaggerModelName = 'deviceTransient';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,15 +57,14 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'name' => 'string',
-        'type' => 'string',
-        'parameters' => 'object',
-        'mute_for' => 'float',
-        'last_triggered' => '\DateTime',
-        'delivery' => 'object',
+        'type' => 'float',
+        'duration' => 'float',
+        'triggered_at' => '\DateTime',
+        'end' => '\DateTime',
+        'sent' => '\DateTime',
+        'sms' => 'bool',
         'id' => 'float',
-        'device_id' => 'float',
-        'user_id' => 'float'
+        'device_id' => 'float'
     ];
 
     /**
@@ -74,15 +73,14 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'name' => null,
-        'type' => null,
-        'parameters' => null,
-        'mute_for' => '',
-        'last_triggered' => 'date-time',
-        'delivery' => null,
+        'type' => '',
+        'duration' => '',
+        'triggered_at' => 'date-time',
+        'end' => 'date-time',
+        'sent' => 'date-time',
+        'sms' => null,
         'id' => '',
-        'device_id' => '',
-        'user_id' => ''
+        'device_id' => ''
     ];
 
     /**
@@ -112,15 +110,14 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
         'type' => 'type',
-        'parameters' => 'parameters',
-        'mute_for' => 'muteFor',
-        'last_triggered' => 'lastTriggered',
-        'delivery' => 'delivery',
+        'duration' => 'duration',
+        'triggered_at' => 'triggeredAt',
+        'end' => 'end',
+        'sent' => 'sent',
+        'sms' => 'sms',
         'id' => 'id',
-        'device_id' => 'deviceId',
-        'user_id' => 'userId'
+        'device_id' => 'deviceId'
     ];
 
     /**
@@ -129,15 +126,14 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
         'type' => 'setType',
-        'parameters' => 'setParameters',
-        'mute_for' => 'setMuteFor',
-        'last_triggered' => 'setLastTriggered',
-        'delivery' => 'setDelivery',
+        'duration' => 'setDuration',
+        'triggered_at' => 'setTriggeredAt',
+        'end' => 'setEnd',
+        'sent' => 'setSent',
+        'sms' => 'setSms',
         'id' => 'setId',
-        'device_id' => 'setDeviceId',
-        'user_id' => 'setUserId'
+        'device_id' => 'setDeviceId'
     ];
 
     /**
@@ -146,15 +142,14 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
         'type' => 'getType',
-        'parameters' => 'getParameters',
-        'mute_for' => 'getMuteFor',
-        'last_triggered' => 'getLastTriggered',
-        'delivery' => 'getDelivery',
+        'duration' => 'getDuration',
+        'triggered_at' => 'getTriggeredAt',
+        'end' => 'getEnd',
+        'sent' => 'getSent',
+        'sms' => 'getSms',
         'id' => 'getId',
-        'device_id' => 'getDeviceId',
-        'user_id' => 'getUserId'
+        'device_id' => 'getDeviceId'
     ];
 
     /**
@@ -217,15 +212,14 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['parameters'] = isset($data['parameters']) ? $data['parameters'] : null;
-        $this->container['mute_for'] = isset($data['mute_for']) ? $data['mute_for'] : null;
-        $this->container['last_triggered'] = isset($data['last_triggered']) ? $data['last_triggered'] : null;
-        $this->container['delivery'] = isset($data['delivery']) ? $data['delivery'] : null;
+        $this->container['duration'] = isset($data['duration']) ? $data['duration'] : null;
+        $this->container['triggered_at'] = isset($data['triggered_at']) ? $data['triggered_at'] : null;
+        $this->container['end'] = isset($data['end']) ? $data['end'] : null;
+        $this->container['sent'] = isset($data['sent']) ? $data['sent'] : null;
+        $this->container['sms'] = isset($data['sms']) ? $data['sms'] : false;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['device_id'] = isset($data['device_id']) ? $data['device_id'] : null;
-        $this->container['user_id'] = isset($data['user_id']) ? $data['user_id'] : null;
     }
 
     /**
@@ -237,17 +231,14 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
-        if ($this->container['mute_for'] === null) {
-            $invalidProperties[] = "'mute_for' can't be null";
+        if ($this->container['duration'] === null) {
+            $invalidProperties[] = "'duration' can't be null";
         }
-        if ($this->container['delivery'] === null) {
-            $invalidProperties[] = "'delivery' can't be null";
+        if ($this->container['triggered_at'] === null) {
+            $invalidProperties[] = "'triggered_at' can't be null";
         }
         return $invalidProperties;
     }
@@ -265,33 +256,9 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
      * Gets type
      *
-     * @return string
+     * @return float
      */
     public function getType()
     {
@@ -301,7 +268,7 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param string $type type
+     * @param float $type type
      *
      * @return $this
      */
@@ -313,97 +280,121 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets parameters
-     *
-     * @return object
-     */
-    public function getParameters()
-    {
-        return $this->container['parameters'];
-    }
-
-    /**
-     * Sets parameters
-     *
-     * @param object $parameters parameters
-     *
-     * @return $this
-     */
-    public function setParameters($parameters)
-    {
-        $this->container['parameters'] = $parameters;
-
-        return $this;
-    }
-
-    /**
-     * Gets mute_for
+     * Gets duration
      *
      * @return float
      */
-    public function getMuteFor()
+    public function getDuration()
     {
-        return $this->container['mute_for'];
+        return $this->container['duration'];
     }
 
     /**
-     * Sets mute_for
+     * Sets duration
      *
-     * @param float $mute_for mute_for
+     * @param float $duration duration
      *
      * @return $this
      */
-    public function setMuteFor($mute_for)
+    public function setDuration($duration)
     {
-        $this->container['mute_for'] = $mute_for;
+        $this->container['duration'] = $duration;
 
         return $this;
     }
 
     /**
-     * Gets last_triggered
+     * Gets triggered_at
      *
      * @return \DateTime
      */
-    public function getLastTriggered()
+    public function getTriggeredAt()
     {
-        return $this->container['last_triggered'];
+        return $this->container['triggered_at'];
     }
 
     /**
-     * Sets last_triggered
+     * Sets triggered_at
      *
-     * @param \DateTime $last_triggered last_triggered
+     * @param \DateTime $triggered_at triggered_at
      *
      * @return $this
      */
-    public function setLastTriggered($last_triggered)
+    public function setTriggeredAt($triggered_at)
     {
-        $this->container['last_triggered'] = $last_triggered;
+        $this->container['triggered_at'] = $triggered_at;
 
         return $this;
     }
 
     /**
-     * Gets delivery
+     * Gets end
      *
-     * @return object
+     * @return \DateTime
      */
-    public function getDelivery()
+    public function getEnd()
     {
-        return $this->container['delivery'];
+        return $this->container['end'];
     }
 
     /**
-     * Sets delivery
+     * Sets end
      *
-     * @param object $delivery delivery
+     * @param \DateTime $end end
      *
      * @return $this
      */
-    public function setDelivery($delivery)
+    public function setEnd($end)
     {
-        $this->container['delivery'] = $delivery;
+        $this->container['end'] = $end;
+
+        return $this;
+    }
+
+    /**
+     * Gets sent
+     *
+     * @return \DateTime
+     */
+    public function getSent()
+    {
+        return $this->container['sent'];
+    }
+
+    /**
+     * Sets sent
+     *
+     * @param \DateTime $sent sent
+     *
+     * @return $this
+     */
+    public function setSent($sent)
+    {
+        $this->container['sent'] = $sent;
+
+        return $this;
+    }
+
+    /**
+     * Gets sms
+     *
+     * @return bool
+     */
+    public function getSms()
+    {
+        return $this->container['sms'];
+    }
+
+    /**
+     * Sets sms
+     *
+     * @param bool $sms sms
+     *
+     * @return $this
+     */
+    public function setSms($sms)
+    {
+        $this->container['sms'] = $sms;
 
         return $this;
     }
@@ -452,30 +443,6 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
     public function setDeviceId($device_id)
     {
         $this->container['device_id'] = $device_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets user_id
-     *
-     * @return float
-     */
-    public function getUserId()
-    {
-        return $this->container['user_id'];
-    }
-
-    /**
-     * Sets user_id
-     *
-     * @param float $user_id user_id
-     *
-     * @return $this
-     */
-    public function setUserId($user_id)
-    {
-        $this->container['user_id'] = $user_id;
 
         return $this;
     }

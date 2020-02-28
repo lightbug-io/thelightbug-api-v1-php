@@ -1,6 +1,6 @@
 <?php
 /**
- * NotificationTrigger
+ * Notification
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * NotificationTrigger Class Doc Comment
+ * Notification Class Doc Comment
  *
  * @category Class
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class NotificationTrigger implements ModelInterface, ArrayAccess
+class Notification implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'notificationTrigger';
+    protected static $swaggerModelName = 'notification';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,15 +57,16 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'name' => 'string',
-        'type' => 'string',
-        'parameters' => 'object',
-        'mute_for' => 'float',
-        'last_triggered' => '\DateTime',
-        'delivery' => 'object',
+        'created' => '\DateTime',
+        'params' => 'object',
+        'message' => 'string',
+        'dismissed_on' => '\DateTime',
+        'dismissed_by' => 'object',
         'id' => 'float',
         'device_id' => 'float',
-        'user_id' => 'float'
+        'point_id' => 'float',
+        'user_id' => 'float',
+        'trigger_id' => 'float'
     ];
 
     /**
@@ -74,15 +75,16 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'name' => null,
-        'type' => null,
-        'parameters' => null,
-        'mute_for' => '',
-        'last_triggered' => 'date-time',
-        'delivery' => null,
+        'created' => 'date-time',
+        'params' => null,
+        'message' => null,
+        'dismissed_on' => 'date-time',
+        'dismissed_by' => null,
         'id' => '',
         'device_id' => '',
-        'user_id' => ''
+        'point_id' => '',
+        'user_id' => '',
+        'trigger_id' => ''
     ];
 
     /**
@@ -112,15 +114,16 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'type' => 'type',
-        'parameters' => 'parameters',
-        'mute_for' => 'muteFor',
-        'last_triggered' => 'lastTriggered',
-        'delivery' => 'delivery',
+        'created' => 'created',
+        'params' => 'params',
+        'message' => 'message',
+        'dismissed_on' => 'dismissedOn',
+        'dismissed_by' => 'dismissedBy',
         'id' => 'id',
         'device_id' => 'deviceId',
-        'user_id' => 'userId'
+        'point_id' => 'pointId',
+        'user_id' => 'userId',
+        'trigger_id' => 'triggerId'
     ];
 
     /**
@@ -129,15 +132,16 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'type' => 'setType',
-        'parameters' => 'setParameters',
-        'mute_for' => 'setMuteFor',
-        'last_triggered' => 'setLastTriggered',
-        'delivery' => 'setDelivery',
+        'created' => 'setCreated',
+        'params' => 'setParams',
+        'message' => 'setMessage',
+        'dismissed_on' => 'setDismissedOn',
+        'dismissed_by' => 'setDismissedBy',
         'id' => 'setId',
         'device_id' => 'setDeviceId',
-        'user_id' => 'setUserId'
+        'point_id' => 'setPointId',
+        'user_id' => 'setUserId',
+        'trigger_id' => 'setTriggerId'
     ];
 
     /**
@@ -146,15 +150,16 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'type' => 'getType',
-        'parameters' => 'getParameters',
-        'mute_for' => 'getMuteFor',
-        'last_triggered' => 'getLastTriggered',
-        'delivery' => 'getDelivery',
+        'created' => 'getCreated',
+        'params' => 'getParams',
+        'message' => 'getMessage',
+        'dismissed_on' => 'getDismissedOn',
+        'dismissed_by' => 'getDismissedBy',
         'id' => 'getId',
         'device_id' => 'getDeviceId',
-        'user_id' => 'getUserId'
+        'point_id' => 'getPointId',
+        'user_id' => 'getUserId',
+        'trigger_id' => 'getTriggerId'
     ];
 
     /**
@@ -217,15 +222,16 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['parameters'] = isset($data['parameters']) ? $data['parameters'] : null;
-        $this->container['mute_for'] = isset($data['mute_for']) ? $data['mute_for'] : null;
-        $this->container['last_triggered'] = isset($data['last_triggered']) ? $data['last_triggered'] : null;
-        $this->container['delivery'] = isset($data['delivery']) ? $data['delivery'] : null;
+        $this->container['created'] = isset($data['created']) ? $data['created'] : null;
+        $this->container['params'] = isset($data['params']) ? $data['params'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['dismissed_on'] = isset($data['dismissed_on']) ? $data['dismissed_on'] : null;
+        $this->container['dismissed_by'] = isset($data['dismissed_by']) ? $data['dismissed_by'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['device_id'] = isset($data['device_id']) ? $data['device_id'] : null;
+        $this->container['point_id'] = isset($data['point_id']) ? $data['point_id'] : null;
         $this->container['user_id'] = isset($data['user_id']) ? $data['user_id'] : null;
+        $this->container['trigger_id'] = isset($data['trigger_id']) ? $data['trigger_id'] : null;
     }
 
     /**
@@ -237,17 +243,8 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['mute_for'] === null) {
-            $invalidProperties[] = "'mute_for' can't be null";
-        }
-        if ($this->container['delivery'] === null) {
-            $invalidProperties[] = "'delivery' can't be null";
+        if ($this->container['created'] === null) {
+            $invalidProperties[] = "'created' can't be null";
         }
         return $invalidProperties;
     }
@@ -265,145 +262,121 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string $type type
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets parameters
-     *
-     * @return object
-     */
-    public function getParameters()
-    {
-        return $this->container['parameters'];
-    }
-
-    /**
-     * Sets parameters
-     *
-     * @param object $parameters parameters
-     *
-     * @return $this
-     */
-    public function setParameters($parameters)
-    {
-        $this->container['parameters'] = $parameters;
-
-        return $this;
-    }
-
-    /**
-     * Gets mute_for
-     *
-     * @return float
-     */
-    public function getMuteFor()
-    {
-        return $this->container['mute_for'];
-    }
-
-    /**
-     * Sets mute_for
-     *
-     * @param float $mute_for mute_for
-     *
-     * @return $this
-     */
-    public function setMuteFor($mute_for)
-    {
-        $this->container['mute_for'] = $mute_for;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_triggered
+     * Gets created
      *
      * @return \DateTime
      */
-    public function getLastTriggered()
+    public function getCreated()
     {
-        return $this->container['last_triggered'];
+        return $this->container['created'];
     }
 
     /**
-     * Sets last_triggered
+     * Sets created
      *
-     * @param \DateTime $last_triggered last_triggered
+     * @param \DateTime $created created
      *
      * @return $this
      */
-    public function setLastTriggered($last_triggered)
+    public function setCreated($created)
     {
-        $this->container['last_triggered'] = $last_triggered;
+        $this->container['created'] = $created;
 
         return $this;
     }
 
     /**
-     * Gets delivery
+     * Gets params
      *
      * @return object
      */
-    public function getDelivery()
+    public function getParams()
     {
-        return $this->container['delivery'];
+        return $this->container['params'];
     }
 
     /**
-     * Sets delivery
+     * Sets params
      *
-     * @param object $delivery delivery
+     * @param object $params params
      *
      * @return $this
      */
-    public function setDelivery($delivery)
+    public function setParams($params)
     {
-        $this->container['delivery'] = $delivery;
+        $this->container['params'] = $params;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /**
+     * Sets message
+     *
+     * @param string $message message
+     *
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets dismissed_on
+     *
+     * @return \DateTime
+     */
+    public function getDismissedOn()
+    {
+        return $this->container['dismissed_on'];
+    }
+
+    /**
+     * Sets dismissed_on
+     *
+     * @param \DateTime $dismissed_on dismissed_on
+     *
+     * @return $this
+     */
+    public function setDismissedOn($dismissed_on)
+    {
+        $this->container['dismissed_on'] = $dismissed_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets dismissed_by
+     *
+     * @return object
+     */
+    public function getDismissedBy()
+    {
+        return $this->container['dismissed_by'];
+    }
+
+    /**
+     * Sets dismissed_by
+     *
+     * @param object $dismissed_by dismissed_by
+     *
+     * @return $this
+     */
+    public function setDismissedBy($dismissed_by)
+    {
+        $this->container['dismissed_by'] = $dismissed_by;
 
         return $this;
     }
@@ -457,6 +430,30 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets point_id
+     *
+     * @return float
+     */
+    public function getPointId()
+    {
+        return $this->container['point_id'];
+    }
+
+    /**
+     * Sets point_id
+     *
+     * @param float $point_id point_id
+     *
+     * @return $this
+     */
+    public function setPointId($point_id)
+    {
+        $this->container['point_id'] = $point_id;
+
+        return $this;
+    }
+
+    /**
      * Gets user_id
      *
      * @return float
@@ -476,6 +473,30 @@ class NotificationTrigger implements ModelInterface, ArrayAccess
     public function setUserId($user_id)
     {
         $this->container['user_id'] = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets trigger_id
+     *
+     * @return float
+     */
+    public function getTriggerId()
+    {
+        return $this->container['trigger_id'];
+    }
+
+    /**
+     * Sets trigger_id
+     *
+     * @param float $trigger_id trigger_id
+     *
+     * @return $this
+     */
+    public function setTriggerId($trigger_id)
+    {
+        $this->container['trigger_id'] = $trigger_id;
 
         return $this;
     }

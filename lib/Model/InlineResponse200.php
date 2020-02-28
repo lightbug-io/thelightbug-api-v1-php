@@ -1,6 +1,6 @@
 <?php
 /**
- * GeoPoint
+ * InlineResponse200
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * GeoPoint Class Doc Comment
+ * InlineResponse200 Class Doc Comment
  *
  * @category Class
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class GeoPoint implements ModelInterface, ArrayAccess
+class InlineResponse200 implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class GeoPoint implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'GeoPoint';
+    protected static $swaggerModelName = 'inline_response_200';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,9 @@ class GeoPoint implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'lat' => 'float',
-        'lng' => 'float'
+        'client_id' => 'string',
+        'username' => 'string',
+        'password' => 'string'
     ];
 
     /**
@@ -67,8 +68,9 @@ class GeoPoint implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'lat' => null,
-        'lng' => null
+        'client_id' => null,
+        'username' => null,
+        'password' => null
     ];
 
     /**
@@ -98,8 +100,9 @@ class GeoPoint implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'lat' => 'lat',
-        'lng' => 'lng'
+        'client_id' => 'clientId',
+        'username' => 'username',
+        'password' => 'password'
     ];
 
     /**
@@ -108,8 +111,9 @@ class GeoPoint implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'lat' => 'setLat',
-        'lng' => 'setLng'
+        'client_id' => 'setClientId',
+        'username' => 'setUsername',
+        'password' => 'setPassword'
     ];
 
     /**
@@ -118,8 +122,9 @@ class GeoPoint implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'lat' => 'getLat',
-        'lng' => 'getLng'
+        'client_id' => 'getClientId',
+        'username' => 'getUsername',
+        'password' => 'getPassword'
     ];
 
     /**
@@ -182,8 +187,9 @@ class GeoPoint implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['lat'] = isset($data['lat']) ? $data['lat'] : null;
-        $this->container['lng'] = isset($data['lng']) ? $data['lng'] : null;
+        $this->container['client_id'] = isset($data['client_id']) ? $data['client_id'] : null;
+        $this->container['username'] = isset($data['username']) ? $data['username'] : null;
+        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
     }
 
     /**
@@ -211,49 +217,73 @@ class GeoPoint implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets lat
+     * Gets client_id
      *
-     * @return float
+     * @return string
      */
-    public function getLat()
+    public function getClientId()
     {
-        return $this->container['lat'];
+        return $this->container['client_id'];
     }
 
     /**
-     * Sets lat
+     * Sets client_id
      *
-     * @param float $lat lat
+     * @param string $client_id client_id
      *
      * @return $this
      */
-    public function setLat($lat)
+    public function setClientId($client_id)
     {
-        $this->container['lat'] = $lat;
+        $this->container['client_id'] = $client_id;
 
         return $this;
     }
 
     /**
-     * Gets lng
+     * Gets username
      *
-     * @return float
+     * @return string
      */
-    public function getLng()
+    public function getUsername()
     {
-        return $this->container['lng'];
+        return $this->container['username'];
     }
 
     /**
-     * Sets lng
+     * Sets username
      *
-     * @param float $lng lng
+     * @param string $username username
      *
      * @return $this
      */
-    public function setLng($lng)
+    public function setUsername($username)
     {
-        $this->container['lng'] = $lng;
+        $this->container['username'] = $username;
+
+        return $this;
+    }
+
+    /**
+     * Gets password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->container['password'];
+    }
+
+    /**
+     * Sets password
+     *
+     * @param string $password password
+     *
+     * @return $this
+     */
+    public function setPassword($password)
+    {
+        $this->container['password'] = $password;
 
         return $this;
     }

@@ -2,11 +2,7 @@
 
 //Imports
 use Swagger\Client\Helpers;
-require_once(__DIR__ . '/../autoload.php');
-
-// Create our api clients
-$user_api = new Swagger\Client\Api\UserApi();
-$device_api= new Swagger\Client\Api\DeviceApi();
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 // Enter login details here
 const USERNAME = '';
@@ -16,9 +12,9 @@ const PASSWORD = '';
 $token = Helpers::login(USERNAME, PASSWORD);// we can also reuse an application wide token, default ttl is 2 weeks
 $userId = $token->getUserId();  // store user ID
 
-//Authenticate our clients with the returned acess token
-$user_api->getApiClient()->getConfig()->addDefaultHeader("Authorization", $token->getId());
-$device_api->getApiClient()->getConfig()->addDefaultHeader("Authorization", $token->getId());
+// Create our authenticated api clients
+$user_api = new Swagger\Client\Api\UserApi(new \GuzzleHttp\Client(["headers" => ["Authorization" => $token->getId()]]));
+$device_api = new Swagger\Client\Api\DeviceApi(new \GuzzleHttp\Client(["headers" => ["Authorization" => $token->getId()]]));
 
 //Get devices on the account:
 $devices = [];
@@ -29,9 +25,11 @@ try {
     die();
 }
 
-// Setup the time period we are interested in
-$earliestTime = new DateTime( "2017-01-01 15:00:00", new DateTimeZone("America/Los_Angeles"));
-$latestTime = new DateTime( "2018-01-01 15:00:00", new DateTimeZone("America/Los_Angeles"));
+// Setup the time period we are interested in (last 7 days)
+date_default_timezone_set('America/Los_Angeles');
+$earliestTime = new DateTime();
+$earliestTime->sub(new DateInterval('P7D'));
+$latestTime = new DateTime();//now
 
 // we could also set the earliest and latest times to be relative to current time
 //$earliestTime = (new DateTime())->sub(new DateInterval("P2D")); - substract 2 days (P2D) from the current time
@@ -47,13 +45,13 @@ $point_filter = (object)[
         ]
     ],
     "order" => "timestamp DESC", // order the points in reverse order (newest first)
-    //"limit" => 5 // limit to the last (newest) 5 points
+    "limit" => 5 // limit to the last (newest) 5 points
 ];
 
 // Get the points
 foreach($devices as $device){
     try {
-        $points = $device_api->devicePrototypeGetPoints($device->getId(), $point_filter);
+        $points = $device_api->devicePrototypeGetPoints($device->getId(), json_encode($point_filter));
         echo '<h3>Points for device '. $device->getName().'</h3>';
         foreach($points as $point){
             if($point->getLocationType() !== 'invalid' && $point->getLocation()) {

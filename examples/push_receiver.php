@@ -1,9 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../autoload.php');
-use Swagger\Client\constants;
-
-$device_api= new Swagger\Client\Api\DeviceApi();
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 const USERNAME = '';
 const PASSWORD = '';
@@ -50,18 +47,14 @@ else if($incoming->Type == "Notification"){
     // also available $datapoint->speed $datapoint->course...
 
 
-    // Check if device is waiting for instructions
-    if($device->currentMode == constants::MODE_AVAILABLE){
-
-        // We need to authenticate before sending instructions
-        $token = \Swagger\Client\Helpers::login(USERNAME, PASSWORD);// we can also reuse an application wide token
-        $device_api->getApiClient()->getConfig()->addDefaultHeader("Authorization", $token->getId());
-
-        // Now take action: wake up device
-        $device_api->devicePrototypeWakeUp($device->id);
-        // or go to sleep
-        //$device_api->devicePrototypeSleep($device->getId());
-    }
+//    if(trigger) {
+//
+//        // We'd need to authenticate before sending instructions
+//        $token = \Swagger\Client\Helpers::login(USERNAME, PASSWORD);// we can also reuse an application wide token
+//        $device_api = new Swagger\Client\Api\DeviceApi(new \GuzzleHttp\Client(["headers" => ["Authorization" => $token->getId()]]));
+//
+//        //do something with the device
+//    }
 
 
     fwrite($handle, "Log: ".$log_entry .PHP_EOL);

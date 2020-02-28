@@ -2,23 +2,18 @@
 
 //Imports
 use Swagger\Client\Helpers;
-require_once(__DIR__ . '/../autoload.php');
-
-// Create our api clients
-$user_api = new Swagger\Client\Api\UserApi();
-$device_api= new Swagger\Client\Api\DeviceApi();
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 // Enter login details here
-const USERNAME = 'demo3@demo.com';
-const PASSWORD = 'demo123';
+const USERNAME = '';
+const PASSWORD = '';
 
 // Use details to login
 $token = Helpers::login(USERNAME, PASSWORD);// we can also reuse an application wide token, default ttl is 2 weeks
 $userId = $token->getUserId();  // store user ID
-
-//Authenticate our clients with the returned acess token
-$user_api->getApiClient()->getConfig()->addDefaultHeader("Authorization", $token->getId());
-$device_api->getApiClient()->getConfig()->addDefaultHeader("Authorization", $token->getId());
+// Create our authenticated api clients
+$user_api = new Swagger\Client\Api\UserApi(new \GuzzleHttp\Client(["headers" => ["Authorization" => $token->getId()]]));
+$device_api = new Swagger\Client\Api\DeviceApi(new \GuzzleHttp\Client(["headers" => ["Authorization" => $token->getId()]]));
 
 //Get devices on the account:
 $devices = [];

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **type** | **string** | Sensor type: &#39;ultra&#39; (fill level), &#39;temp&#39; (temperature), ... | 
 **value** | **object** | JSON value | 
 **meta** | **object** | JSON metadata | [optional] 
+**related_id** | **float** | LoraId of another (ie for signal strength) | [optional] 
 **id** | **float** |  | [optional] 
 **gateway_id** | **float** |  | [optional] 
 **device_id** | **float** |  | [optional] 
