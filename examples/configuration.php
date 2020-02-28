@@ -91,12 +91,12 @@ try {
 }
 // Set device safezone:
 try {
-    $result = $device_api->devicePrototypeSetSafeZone([
+    $result = $device_api->devicePrototypeSetSafeZone($devices[0]->getId(), [
         ["lat"=> 51.344338, "lng" => -5.42724],
         ["lat"=> 53.278353, "lng" => 1.77978],
         ["lat"=> 50.625073, "lng" => 3.09814],
         ["lat"=> 49.4395569, "lng" => -5.29541]
-    ], $devices[0]->getId());
+    ]);
     echo "Device safezone set";
     var_dump($result);
 } catch (Exception $e) {
