@@ -51,15 +51,19 @@ $point_filter = (object)[
 // Get the points
 foreach($devices as $device){
     try {
+        $deviceConfig = $device_api->devicePrototypeGetConfig($device->getId()); // see configuration.php for how to change settings
         $points = $device_api->devicePrototypeGetPoints($device->getId(), json_encode($point_filter));
-        echo '<h3>Points for device '. $device->getName().'</h3>';
+        echo '<h3>Points for device '. $device->getName().' (Battery: '.$device->getBatteryVoltage().'V, Firmware: '.$deviceConfig->getCurrentFw().') </h3>';
         foreach($points as $point){
             if($point->getLocationType() !== 'invalid' && $point->getLocation()) {
                 $date = $point->getTimestamp();
                 $date->setTimezone(new DateTimeZone("America/Los_Angeles")); // localise the timestamp
                 echo '<b>'. $date->format('Y-m-d H:i:s') . ':</b> [' . $point->getLocation()->getLat() . ',' . $point->getLocation()->getLng() . ']';
                 if ($point->getAddress()) echo ' - ' . $point->getAddress();
-                // $point->getSpeed ... , see lib/Model/Datapoint.php
+                // for all point properties see lib/Model/Datapoint.php
+                // $point->getSpeed()
+                // $point->getCourse()
+                // $point->getBatteryVoltage() - batteryVoltage at time of transmission
                 echo "<br>";
             }
         }
