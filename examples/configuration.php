@@ -81,14 +81,6 @@ try {
     echo 'Failed to update config ', $e->getMessage(), PHP_EOL;
 }
 
-//Get device safezone if it exists
-try {
-    $result = $device_api->devicePrototypeGetSafeZone($devices[0]->getId());
-    echo "Device safezone is";
-    var_dump($result);
-} catch (Exception $e) {
-    echo 'No safe zone set / Failed to get safezone ', $e->getMessage(), PHP_EOL;
-}
 // Set device safezone:
 try {
     $result = $device_api->devicePrototypeSetSafeZone($devices[0]->getId(), [
