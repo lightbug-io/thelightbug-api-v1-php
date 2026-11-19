@@ -501,34 +501,6 @@
                 "summary": "Update safe-zone for device"
             }
         },
-        "/devices/{id}/getSafeZone": {
-            "get": {
-                "tags": [
-                    "device"
-                ],
-                "operationId": "device.prototype.getSafeZone",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "device id",
-                        "required": true,
-                        "type": "number",
-                        "format": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Body (JSON)",
-                        "schema": {
-                            "$ref": "#/definitions/geofence"
-                        }
-                    }
-                },
-                "deprecated": false,
-                "summary": "Get safe-zone for device"
-            }
-        },
         "/users/{id}/geofences/{fk}": {
             "get": {
                 "tags": [

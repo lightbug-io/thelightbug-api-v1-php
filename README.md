@@ -54,7 +54,6 @@ Class | Method | HTTP request | Description
 *DeviceApi* | [**devicePrototypeGetNotificationTriggers**](docs/Api/DeviceApi.md#deviceprototypegetnotificationtriggers) | **GET** /devices/{id}/notificationTriggers | Get alerts for device
 *DeviceApi* | [**devicePrototypeGetPoints**](docs/Api/DeviceApi.md#deviceprototypegetpoints) | **GET** /devices/{id}/points | Retrieve points for a device
 *DeviceApi* | [**devicePrototypeGetReadings**](docs/Api/DeviceApi.md#deviceprototypegetreadings) | **GET** /devices/{id}/readings | Retrieve readings for a device
-*DeviceApi* | [**devicePrototypeGetSafeZone**](docs/Api/DeviceApi.md#deviceprototypegetsafezone) | **GET** /devices/{id}/getSafeZone | Get safe-zone for device
 *DeviceApi* | [**devicePrototypeGetTransients**](docs/Api/DeviceApi.md#deviceprototypegettransients) | **GET** /devices/{id}/transients | Queries transients of device.
 *DeviceApi* | [**devicePrototypeSetSafeZone**](docs/Api/DeviceApi.md#deviceprototypesetsafezone) | **POST** /devices/{id}/setSafeZone | Update safe-zone for device
 *DeviceApi* | [**devicePrototypeUpdateByIdNotificationTriggers**](docs/Api/DeviceApi.md#deviceprototypeupdatebyidnotificationtriggers) | **PUT** /devices/{id}/notificationTriggers/{fk} | Update an alert/notification trigger by id {fk} for device

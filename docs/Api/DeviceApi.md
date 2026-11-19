@@ -19,7 +19,6 @@ Method | HTTP request | Description
 [**devicePrototypeGetNotificationTriggers**](DeviceApi.md#devicePrototypeGetNotificationTriggers) | **GET** /devices/{id}/notificationTriggers | Get alerts for device
 [**devicePrototypeGetPoints**](DeviceApi.md#devicePrototypeGetPoints) | **GET** /devices/{id}/points | Retrieve points for a device
 [**devicePrototypeGetReadings**](DeviceApi.md#devicePrototypeGetReadings) | **GET** /devices/{id}/readings | Retrieve readings for a device
-[**devicePrototypeGetSafeZone**](DeviceApi.md#devicePrototypeGetSafeZone) | **GET** /devices/{id}/getSafeZone | Get safe-zone for device
 [**devicePrototypeGetTransients**](DeviceApi.md#devicePrototypeGetTransients) | **GET** /devices/{id}/transients | Queries transients of device.
 [**devicePrototypeSetSafeZone**](DeviceApi.md#devicePrototypeSetSafeZone) | **POST** /devices/{id}/setSafeZone | Update safe-zone for device
 [**devicePrototypeUpdateByIdNotificationTriggers**](DeviceApi.md#devicePrototypeUpdateByIdNotificationTriggers) | **PUT** /devices/{id}/notificationTriggers/{fk} | Update an alert/notification trigger by id {fk} for device
@@ -744,53 +743,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Swagger\Client\Model\SensorReading[]**](../Model/SensorReading.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json, application/x-www-form-urlencoded, application/xml, text/xml
- - **Accept**: application/json, application/xml, text/xml, application/javascript, text/javascript
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-# **devicePrototypeGetSafeZone**
-> \Swagger\Client\Model\Geofence devicePrototypeGetSafeZone($id)
-
-Get safe-zone for device
-
-### Example
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$apiInstance = new Swagger\Client\Api\DeviceApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-$id = 8.14; // float | device id
-
-try {
-    $result = $apiInstance->devicePrototypeGetSafeZone($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling DeviceApi->devicePrototypeGetSafeZone: ', $e->getMessage(), PHP_EOL;
-}
-?>
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **float**| device id |
-
-### Return type
-
-[**\Swagger\Client\Model\Geofence**](../Model/Geofence.md)
 
 ### Authorization
 
